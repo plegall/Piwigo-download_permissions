@@ -29,11 +29,6 @@ if (defined('IN_ADMIN'))
 function dlperms_init()
 {
   global $user;
-  
-  include_once(DLPERMS_PATH.'maintain.inc.php');
-  $maintain = new download_permissions_maintain('download_permissions');
-  $maintain->autoUpdate(DLPERMS_VERSION, 'install');
-
   // overwrite $user['enabled_high'] depending on the current album
   if ('action' == script_basename() and isset($_GET['id']) and is_numeric($_GET['id']))
   {

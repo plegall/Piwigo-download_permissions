@@ -4,13 +4,14 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 class download_permissions_maintain extends PluginMaintain
 {
   private $installed = false;
-  
-  private $default_conf = array();
+
+  function __construct($plugin_id)
+  {
+    parent::__construct($plugin_id);
+  }
 
   function install($plugin_version, &$errors=array())
   {
-    global $conf, $prefixeTable;
-
     // create categories.downloadable (true/false)
     $result = pwg_query('SHOW COLUMNS FROM `'.CATEGORIES_TABLE.'` LIKE "downloadable";');
     if (!pwg_db_num_rows($result))
@@ -29,14 +30,17 @@ class download_permissions_maintain extends PluginMaintain
     }
   }
 
+  function update($old_version, $new_version, &$errors=array())
+  {
+    $this->install($new_version, $errors);
+  }
+
   function deactivate()
   {
   }
 
   function uninstall()
   {
-    global $prefixeTable;
-    
     pwg_query('ALTER TABLE '.CATEGORIES_TABLE.' DROP COLUMN downloadable;');
   }
 }
