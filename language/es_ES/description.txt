@@ -1,1 +1,1 @@
-Permite la descarga de fotos, filtradas por cada álbumes.
+Permite la descarga de fotos, filtrando por cada álbum.
